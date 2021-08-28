@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
+
+import Laypout from './components/Laypout.jsx';
+
+
+import './sass/index.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Laypout />
   </React.StrictMode>,
   document.getElementById('root')
 );

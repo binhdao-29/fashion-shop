@@ -1,0 +1,53 @@
+/** Flex **/
+
+@mixin flex($align-items, $justify-content) {
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+/** Responsive **/
+
+$SM: 576px;
+$MD: 768px;
+$LG: 992px;
+$XL: 1200px;
+
+@mixin responsive($screen-size) {
+  @if $screen-size == SM {
+      @media only screen and (min-width: $SM) {
+          @content;
+      }
+  } @else if $screen-size == MD {
+      @media only screen and (min-width: $MD) {
+          @content;
+      }
+  } @else if $screen-size == LG {
+      @media only screen and (min-width: $LG) {
+          @content;
+      }
+  } @else if $screen-size == XL {
+      @media only screen and (min-width: $XL) {
+          @content;
+      }
+  }
+}
+
+/** Size **/
+
+@mixin box($width, $height) {
+  height: $height;
+  width: $width;
+}
+
+/** Text ellipsis**/
+
+@mixin text-ellipsis($width, $line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+
+  width: $width;
+}
