@@ -14,7 +14,7 @@ const Laypout = () => {
           <div>
             <Header {...props}/>
 
-            <div className="container">
+            <div className="container" style={{height: '100vh'}}>
               <Routes/>
             </div>
 

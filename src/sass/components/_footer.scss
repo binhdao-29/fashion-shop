@@ -1,0 +1,110 @@
+.footer {
+  background: var(--color-bg-dark);
+  color: var(--color-light);
+  padding-top: 75px;
+  padding-bottom: 35px;
+
+  .footer-block {
+    padding-bottom: 50px;
+  }
+
+  .footer__title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    text-transform: uppercase;
+    padding-bottom: 30px;
+  }
+
+  .footer__link {
+    margin-bottom: 10px;
+
+    a {
+      color: var(--color-gray);
+      font-size: 13px;
+      line-height: 1.923;
+    }
+  }
+
+  a:hover {
+    color: var(--color-primary);
+  }
+
+  .footer__text {
+    max-width: 270px;
+    color: var(--color-gray);
+    font-size: 13px;
+    line-height: 1.923;
+    margin: 0;
+  }
+
+  .footer__social {
+    color: var(--color-gray);
+    margin-top: 27px;
+    
+    @include flex(center, flex-start);
+
+    .icon {
+      font-size: 18px;
+      margin-right: 18px;
+    }
+  }
+
+  .input-warper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 4px;
+    border-bottom: 2px solid rgba(204,204,204, 0.1);
+
+    input {
+      background-color: transparent;
+      width: 100%;
+      border: none;
+      color: var(--color-gray);
+      font-size: 13px;
+      line-height: 1.923;
+      
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .focus-input {
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background-color: var(--color-primary-dark);
+      left: 0;
+      bottom: -2px;
+      transition: all 0.4s;
+    }
+
+    .focus-input.active {
+      width: 100%;
+    }
+  }
+
+  .footer-bottom {
+    padding-top: 40px;
+
+    .cards {
+      padding-bottom: 18px;
+
+      @include flex(center, center);
+
+      img {
+        width: 35px;
+        height: 30px;
+      }
+    }
+
+    .copyright {
+      text-align: center;
+      max-width: 100%;
+
+      a {
+        color: var(--color-primary);
+      }
+    }
+  }
+}
