@@ -1,3 +1,23 @@
 .cb-btn {
+  min-width: 179px;
+  height: 46px;
+  border-radius: 23px;
+  background-color: #e6e6e6;
+  color: var(--color-bg-dark);
+  font-size: 15px;
+  line-height: 1.466667;
+  border: none;
+  text-transform: uppercase;
+  transition: all 0.4s;
 
+  @include flex(center, center);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+  }
 }

@@ -84,6 +84,18 @@
     }
   }
 
+  .footer-btn {
+    background-color: var(--color-primary-dark);
+    color: var(--color-light);
+    font-weight: 600;
+    margin-top: 18px;
+
+    &:hover {
+      background-color: var(--color-light);
+      color: var(--color-primary-dark);
+    }
+  }
+
   .footer-bottom {
     padding-top: 40px;
 

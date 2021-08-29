@@ -118,7 +118,7 @@ const Footer = () => {
                 <input onChange={onTextInputChange} type="text" name="email" placeholder="email@example.com" />
                 <div className={`focus-input ${textInput !== "" ? 'active': ''}`}></div>
               </div>
-              <div className="cb-btn">Subscribe</div>
+              <button className="footer-btn cb-btn">Subscribe</button>
             </form>
           </div>
         </div>
