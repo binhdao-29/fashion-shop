@@ -15,10 +15,13 @@ const mainNav = [
     path: "/blog"
   },
   {
+    display: "About",
+    path: "/about"
+  },
+  {
     display: "Contact",
     path: "/contact"
   },
-
 ];
 
 const Header = () => {
