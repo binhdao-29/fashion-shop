@@ -1,0 +1,123 @@
+.hero-slide {
+  position: relative;
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 30px;
+    color: var(--color-light);
+  }
+
+  .hero-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    padding: 100px 0 60px;
+    color: var(--color-light);
+  
+    @include flex-column(center, center);
+  
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  
+    .title {
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 22px 0 40px;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(110%);
+      transition: transform 1s ease 1s, opacity 1s ease 1s
+    }
+  
+    .subtitle {
+      font-family: var(--ff-second);
+      font-size: 28px;
+      line-height: 1.2857;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(-150%);
+      transition: transform 1s ease, opacity 1s ease;
+    }
+  
+    .hero-btn {
+      background-color: var(--color-primary-dark);
+      color: var(--color-light);
+      font-weight: 600;
+      z-index: 10;
+      opacity: 0;
+      transform: scale(0.2);
+      transition: transform 1s ease 1.5s, opacity 1s ease 1.5s;
+  
+      &:hover {
+        background-color: var(--color-light);
+        color: var(--color-primary-dark);
+      }
+    }
+  }
+
+  .swiper-slide-active {
+    .title,
+    .subtitle {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-btn {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.hero-thumbs {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 60px;
+
+  .thumb-wrapper {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+
+    &::after {
+      content: 'More';
+      position: absolute;
+      inset: 0;
+      font-size: 18px;
+      font-weight: 200;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: var(--color-light);
+      opacity: 0;
+      transition: all 0.5s;
+
+      @include flex(center, center);
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+
+  .swiper-wrapper {
+    @include flex(center, center);
+  }
+
+  .swiper-slide {
+    width: clamp(100px , calc((80% - 190px) / 3), 190px) !important;
+    height: 100px;
+    margin-left: 1px;
+  }
+}

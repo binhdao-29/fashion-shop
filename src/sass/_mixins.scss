@@ -6,6 +6,13 @@
   justify-content: $justify-content;
 }
 
+@mixin flex-column($align-items, $justify-content) {
+  display: flex;
+  flex-direction: column;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
 /** Responsive **/
 
 $SM: 576px;

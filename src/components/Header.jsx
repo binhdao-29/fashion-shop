@@ -1,6 +1,13 @@
 import React, { useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import post1 from '../assets/images/post/post1.jpg';
+import post2 from '../assets/images/post/post2.jpg';
+import post3 from '../assets/images/post/post3.jpg';
+import post4 from '../assets/images/post/post4.jpg';
+import post5 from '../assets/images/post/post5.jpg';
+import post6 from '../assets/images/post/post6.jpg';
+
 const mainNav = [
   {
     display: "Home",
@@ -21,6 +28,27 @@ const mainNav = [
   {
     display: "Contact",
     path: "/contact"
+  },
+];
+
+const gallery = [
+  {
+    img: post1
+  },
+  {
+    img: post2
+  },
+  {
+    img: post3
+  },
+  {
+    img: post4
+  },
+  {
+    img: post5
+  },
+  {
+    img: post6
   },
 ];
 
@@ -70,6 +98,19 @@ const Header = () => {
               </div>
             ))
           }
+
+          <div className="header-info">
+            <span className="name">@ CocaStore</span>
+            <div className="gallery">
+              {
+                gallery.map((item, index) => (
+                  <div key={index} className="wrap-item-gallery">
+                    <img src={item.img} alt="" />
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
         <div className="header__icon">
           <div className="icon">
