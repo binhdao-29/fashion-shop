@@ -45,12 +45,6 @@ const helpLinks = [
   }
 ];
 
-const cards = [
-  {
-    display: '../assets/images/cards/credit-card.svg'
-  }
-]
-
 const Footer = () => {
 
   const [textInput, setTextInput] = useState("");

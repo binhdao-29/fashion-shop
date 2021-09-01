@@ -2,6 +2,9 @@
 @import "./mixins";
 @import "./base";
 
+// Vendor
+
+@import "./vendors/swiper";
 
 // Component
 
@@ -13,3 +16,4 @@
 
 @import "./pages/about";
 @import "./pages/blog";
+
