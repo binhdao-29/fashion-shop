@@ -1,0 +1,39 @@
+.custom-checkbox {
+  position: relative;
+  margin-bottom: 5px;
+  @include flex(center, flex-start);
+
+  input {
+    position: absolute;
+    opacity: 0;
+    z-index: 100;
+    cursor: pointer;
+  }
+
+  .check-mark {
+    position: relative;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border: 1px solid var(--color-gray-dark);
+
+    i {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: scale(0);
+      transition: transform 0.3s ease;
+    }
+  }
+
+  input:checked ~ .check-mark {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    border: 1px solid var(--color-primary);
+
+    i {
+      transform: scale(0.7);
+    }
+  }
+}
