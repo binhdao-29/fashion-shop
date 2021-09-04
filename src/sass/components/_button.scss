@@ -8,6 +8,7 @@
   line-height: 1.466667;
   border: none;
   text-transform: uppercase;
+  cursor: pointer;
   transition: all 0.4s;
 
   @include flex(center, center);

@@ -1,0 +1,19 @@
+.popular-product {
+  padding-top: 140px;
+  padding-bottom: 140px;
+
+  .popular-product__title {
+    color: var(--color-bg-dark);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+  }
+
+  .load-more {
+    @include flex(center, center);
+
+    padding-top: 45px;
+  }
+}
