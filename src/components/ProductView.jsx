@@ -1,6 +1,8 @@
 import React , { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import SuccessModal from './SuccessModal';
+
 
 const ProductView = ({product, display, setDisplay}) => {
 
@@ -11,9 +13,15 @@ const ProductView = ({product, display, setDisplay}) => {
 
   const [quantity, setQuantity] = useState(1);
 
+  const [isAddSuccess, setSuccess] = useState(false);
+
   const toggleProductView = () => {
     setDisplay(!display);
   }
+
+  const toggleSuccessModal = (isToggle) => {
+    setSuccess(isToggle);
+  } 
 
   useEffect(() => {
     setImageCurrent(product.image01);
@@ -37,13 +45,19 @@ const ProductView = ({product, display, setDisplay}) => {
 
   const addToCart = () => {
     if (checkUndefined()) {
-      console.log("Success!") 
+      setSuccess(true);
       //Expand card drawer
     }
   }
 
   return (
     <div className={`product-view ${ display ? 'active': ''}`}>
+      {/* Add to cart success */}
+      <SuccessModal 
+        isAddSuccess={isAddSuccess}
+        title={product.title} 
+        toggleSuccessModal={toggleSuccessModal}/>
+
       <div className="product-view-overlay"></div>
       <div className="container">
         <div className="product-view__wrapper">
