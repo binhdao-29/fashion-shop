@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-
 import SuccessModal from "./SuccessModal";
 
 const ProductView = ({ product, display, setDisplay }) => {
@@ -14,8 +13,6 @@ const ProductView = ({ product, display, setDisplay }) => {
   const [isAddSuccess, setSuccess] = useState(false);
 
   const productViewRef = useRef(null);
-
-  console.log(productViewRef);
 
   const checkClickOut = (e) => {
     if (e.target === productViewRef.current) {

@@ -1,92 +1,106 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import Helmet from '../components/Helmet';
-import ProductCard from '../components/ProductCard';
-import CheckBox from '../components/CheckBox';
+import React, { useState, useCallback, useEffect, useRef } from "react";
+import Helmet from "../components/Helmet";
+import ProductCard from "../components/ProductCard";
+import CheckBox from "../components/CheckBox";
 
-import productData from '../assets/test-data/products';
-import categories from '../assets/test-data/categories';
-import colors from '../assets/test-data/product-colors';
-import productSize from '../assets/test-data/product-size';
+import productData from "../assets/test-data/products";
+import categories from "../assets/test-data/categories";
+import colors from "../assets/test-data/product-colors";
+import productSize from "../assets/test-data/product-size";
+import noResult from "../assets/images/post/no-result.png";
 
 const Catalog = () => {
-
   const initFilter = {
     category: [],
     color: [],
-    size: []
-  }
+    size: [],
+  };
 
   const productList = productData.getAllProducts();
 
   const [filter, setFilter] = useState(initFilter);
   const [products, setProducts] = useState(productList);
 
+  const inputSearchRef = useRef(null);
+
+  const searchItem = () => {
+    const list = productList.filter((product) => {
+      return product.title.toLowerCase().includes(inputSearchRef.current.value);
+    });
+
+    setProducts(list);
+  };
+
   const filterSelect = (type, checked, item) => {
     if (checked) {
-      switch(type) {
+      switch (type) {
         case "CATEGORY":
-          setFilter({...filter, category: [...filter.category, item.category]});
+          setFilter({
+            ...filter,
+            category: [...filter.category, item.category],
+          });
           break;
         case "COLOR":
-          setFilter({...filter, color: [...filter.color, item.color]});
+          setFilter({ ...filter, color: [...filter.color, item.color] });
           break;
         case "SIZE":
-          setFilter({...filter, size: [...filter.size, item.size]});
+          setFilter({ ...filter, size: [...filter.size, item.size] });
           break;
         default:
-          break
+          break;
       }
     } else {
-      switch(type) {
+      switch (type) {
         case "CATEGORY":
-          const newCategory = filter.category.filter(p => p !== item.category);
-          setFilter({...filter, category: newCategory});
+          const newCategory = filter.category.filter(
+            (p) => p !== item.category
+          );
+          setFilter({ ...filter, category: newCategory });
           break;
         case "COLOR":
-          const newColor = filter.color.filter(p => p !== item.color);
-          setFilter({...filter, color: newColor});
+          const newColor = filter.color.filter((p) => p !== item.color);
+          setFilter({ ...filter, color: newColor });
           break;
         case "SIZE":
-          const newSize = filter.size.filter(p => p !== item.size);
-          setFilter({...filter, size: newSize});
+          const newSize = filter.size.filter((p) => p !== item.size);
+          setFilter({ ...filter, size: newSize });
           break;
 
         default:
-          break
+          break;
       }
     }
-  }
+  };
 
-  const clearFilter = () =>  setFilter(initFilter);
-  
+  const clearFilter = () => setFilter(initFilter);
+
   const updateProducts = useCallback(() => {
     let list = productList;
 
     if (filter.category.length > 0) {
-      list = list.filter(p => {
+      list = list.filter((p) => {
         return filter.category.includes(p.category);
-      })
+      });
     }
     if (filter.color.length > 0) {
-      list = list.filter(p => {
-        const check = p.colors.find(e => filter.color.includes(e));
+      list = list.filter((p) => {
+        const check = p.colors.find((e) => filter.color.includes(e));
         return check !== undefined;
-      })
+      });
     }
     if (filter.size.length > 0) {
-      list = list.filter(p => {
-        const check = p.size.find(e => filter.size.includes(e));
+      list = list.filter((p) => {
+        const check = p.size.find((e) => filter.size.includes(e));
         return check !== undefined;
-      })
+      });
     }
 
     setProducts(list);
-
   }, [filter, productList]);
 
   useEffect(() => {
     updateProducts();
-  }, [updateProducts])
+  }, [updateProducts]);
 
   return (
     <Helmet title="Catalog">
@@ -95,64 +109,88 @@ const Catalog = () => {
           <h2 className="catalog__title">Products</h2>
         </div>
         <div className="catalog-container container">
+          <div className="search-box">
+            <div className="search">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search"
+                ref={inputSearchRef}
+              />
+              <button className="btn-search" onClick={searchItem}>
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
           <div className="row">
             <div className="catalog-filter col-lg-2">
               <div className="catalog-filter__wrapper">
                 <h3 className="catalog-filter__title">Category</h3>
                 <div className="catalog-filter__content">
-                  {
-                    categories.map((item, index) => (
-                      <CheckBox key={index}
-                        label={item.display}
-                        onChange={(input) => filterSelect("CATEGORY", input.checked, item)}
-                        checked={filter.category.includes(item.category)}
-                      />
-                    ))
-                  }
+                  {categories.map((item, index) => (
+                    <CheckBox
+                      key={index}
+                      label={item.display}
+                      onChange={(input) =>
+                        filterSelect("CATEGORY", input.checked, item)
+                      }
+                      checked={filter.category.includes(item.category)}
+                    />
+                  ))}
                 </div>
               </div>
               <div className="catalog-filter__wrapper">
                 <h3 className="catalog-filter__title">Colors</h3>
                 <div className="catalog-filter__content">
-                  {
-                    colors.map((item, index) => (
-                      <CheckBox key={index}
-                        label={item.display}
-                        onChange={(input) => filterSelect("COLOR", input.checked, item)}
-                        checked={filter.color.includes(item.color)}
-                      />
-                    ))
-                  }
+                  {colors.map((item, index) => (
+                    <CheckBox
+                      key={index}
+                      label={item.display}
+                      onChange={(input) =>
+                        filterSelect("COLOR", input.checked, item)
+                      }
+                      checked={filter.color.includes(item.color)}
+                    />
+                  ))}
                 </div>
               </div>
               <div className="catalog-filter__wrapper">
                 <h3 className="catalog-filter__title">Size</h3>
                 <div className="catalog-filter__content">
-                  {
-                    productSize.map((item, index) => (
-                      <CheckBox key={index}
-                        label={item.display}
-                        onChange={(input) => filterSelect("SIZE", input.checked, item)}
-                        checked={filter.size.includes(item.size)}
-                      />
-                    ))
-                  }
+                  {productSize.map((item, index) => (
+                    <CheckBox
+                      key={index}
+                      label={item.display}
+                      onChange={(input) =>
+                        filterSelect("SIZE", input.checked, item)
+                      }
+                      checked={filter.size.includes(item.size)}
+                    />
+                  ))}
                 </div>
               </div>
 
               <div className="catalog-filter__wrapper">
-                <button className="cb-btn" onClick={clearFilter}>Clear Filter</button>
+                <button className="cb-btn" onClick={clearFilter}>
+                  Clear Filter
+                </button>
               </div>
             </div>
 
             <div className="catalog-content col-lg-10">
               <div className="container-fluid">
                 <div className="row">
-                  {
+                  {products.length > 0 ? (
                     products.map((item, index) => (
                       <ProductCard key={index} product={item} />
                     ))
-                  }
+                  ) : (
+                    <div className="no-result">
+                      <img src={noResult} alt="" />
+                      <p className="text">No result is found</p>
+                      <p className="text">Try using more generic keywords</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -160,7 +198,7 @@ const Catalog = () => {
         </div>
       </div>
     </Helmet>
-  )
-}
+  );
+};
 
-export default Catalog
+export default Catalog;
