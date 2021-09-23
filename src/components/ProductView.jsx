@@ -1,11 +1,9 @@
-import React , { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 
-import SuccessModal from './SuccessModal';
+import SuccessModal from "./SuccessModal";
 
-
-const ProductView = ({product, display, setDisplay}) => {
-
+const ProductView = ({ product, display, setDisplay }) => {
   const [imageCurrent, setImageCurrent] = useState(product.image01);
 
   const [color, setColor] = useState(undefined);
@@ -15,13 +13,23 @@ const ProductView = ({product, display, setDisplay}) => {
 
   const [isAddSuccess, setSuccess] = useState(false);
 
+  const productViewRef = useRef(null);
+
+  console.log(productViewRef);
+
+  const checkClickOut = (e) => {
+    if (e.target === productViewRef.current) {
+      setDisplay(!display);
+    }
+  };
+
   const toggleProductView = () => {
     setDisplay(!display);
-  }
+  };
 
   const toggleSuccessModal = (isToggle) => {
     setSuccess(isToggle);
-  } 
+  };
 
   useEffect(() => {
     setImageCurrent(product.image01);
@@ -41,24 +49,28 @@ const ProductView = ({product, display, setDisplay}) => {
     }
 
     return true;
-  }
+  };
 
   const addToCart = () => {
     if (checkUndefined()) {
       setSuccess(true);
-      //Expand card drawer
     }
-  }
+  };
 
   return (
-    <div className={`product-view ${ display ? 'active': ''}`}>
+    <div className={`product-view ${display ? "active" : ""}`}>
       {/* Add to cart success */}
-      <SuccessModal 
+      <SuccessModal
         isAddSuccess={isAddSuccess}
-        title={product.title} 
-        toggleSuccessModal={toggleSuccessModal}/>
+        title={product.title}
+        toggleSuccessModal={toggleSuccessModal}
+      />
 
-      <div className="product-view-overlay"></div>
+      <div
+        ref={productViewRef}
+        onClick={checkClickOut}
+        className="product-view-overlay"
+      ></div>
       <div className="container">
         <div className="product-view__wrapper">
           <div onClick={toggleProductView} className="btn-close">
@@ -68,16 +80,24 @@ const ProductView = ({product, display, setDisplay}) => {
             <div className="col-md-6 col-lg-7">
               <div className="wrapper__image">
                 <ul className="image__list">
-                  <li onClick={() => setImageCurrent(product.image01)} className="image__list__item">
+                  <li
+                    onClick={() => setImageCurrent(product.image01)}
+                    className="image__list__item"
+                  >
                     <img src={product.image01} alt="" />
                     <div className="overlay"></div>
                   </li>
-                  <li onClick={() => setImageCurrent(product.image02)} className="image__list__item">
+                  <li
+                    onClick={() => setImageCurrent(product.image02)}
+                    className="image__list__item"
+                  >
                     <img src={product.image02} alt="" />
                     <div className="overlay"></div>
-
                   </li>
-                  <li onClick={() => setImageCurrent(product.image03)} className="image__list__item">
+                  <li
+                    onClick={() => setImageCurrent(product.image03)}
+                    className="image__list__item"
+                  >
                     <img src={product.image03} alt="" />
                     <div className="overlay"></div>
                   </li>
@@ -97,38 +117,56 @@ const ProductView = ({product, display, setDisplay}) => {
                   <div className="product-variant__wrap">
                     <div className="variant__title">Size</div>
                     <div className="variant__content">
-                      {
-                        product.size.map((s, i) => (
-                          <div key={i} onClick={() => setSize(s)} className={`variant ${size === s ? 'active': '' }`}>
-                            <div className="variant__info">{s}</div>
-                          </div>
-                        ))
-                      }
+                      {product.size.map((s, i) => (
+                        <div
+                          key={i}
+                          onClick={() => setSize(s)}
+                          className={`variant ${size === s ? "active" : ""}`}
+                        >
+                          <div className="variant__info">{s}</div>
+                        </div>
+                      ))}
                     </div>
-
                   </div>
                   <div className="product-variant__wrap">
                     <div className="variant__title">Color</div>
                     <div className="variant__content">
-                      {
-                        product.colors.map((c, i) => (
-                          <div key={i} onClick={() => setColor(c)} className={`variant ${color === c ? 'active': '' }`}>
-                            <div className="variant__info" style={{backgroundColor: `${c}`}}></div>
-                          </div>
-                        ))
-                      }
+                      {product.colors.map((c, i) => (
+                        <div
+                          key={i}
+                          onClick={() => setColor(c)}
+                          className={`variant ${color === c ? "active" : ""}`}
+                        >
+                          <div
+                            className="variant__info"
+                            style={{ backgroundColor: `${c}` }}
+                          ></div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
                   <div className="product-variant__wrap">
-                      <div className="variant__content">
-                        <div className="wrap__num">
-                          <div onClick={() => setQuantity(Math.max(quantity -1 , 0))} className="btn-num">-</div>
-                          <div className="product-num">{quantity}</div>
-                          <div onClick={() => setQuantity(quantity + 1)} className="btn-num">+</div>
+                    <div className="variant__content">
+                      <div className="wrap__num">
+                        <div
+                          onClick={() => setQuantity(Math.max(quantity - 1, 0))}
+                          className="btn-num"
+                        >
+                          -
                         </div>
-                        <div onClick={addToCart} className="cb-btn">Add to cart</div>
+                        <div className="product-num">{quantity}</div>
+                        <div
+                          onClick={() => setQuantity(quantity + 1)}
+                          className="btn-num"
+                        >
+                          +
+                        </div>
                       </div>
+                      <div onClick={addToCart} className="cb-btn">
+                        Add to cart
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="product-social">
@@ -151,13 +189,13 @@ const ProductView = ({product, display, setDisplay}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 ProductView.propTypes = {
   product: PropTypes.object.isRequired,
   display: PropTypes.bool,
-  setDisplay: PropTypes.func
-}
+  setDisplay: PropTypes.func,
+};
 
-export default ProductView
+export default ProductView;
