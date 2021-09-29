@@ -71,7 +71,7 @@ const ProductView = ({ product, display, setDisplay }) => {
       <div className="container">
         <div className="product-view__wrapper">
           <div onClick={toggleProductView} className="btn-close">
-            <i class="fas fa-times"></i>
+            <i className="fas fa-times"></i>
           </div>
           <div className="row">
             <div className="col-md-6 col-lg-7">
@@ -168,16 +168,16 @@ const ProductView = ({ product, display, setDisplay }) => {
                 </div>
                 <div className="product-social">
                   <a href="https://facebook.com/">
-                    <i class="fab fa-facebook-f"></i>
+                    <i className="fab fa-facebook-f"></i>
                   </a>
                   <a href="https://pinterest.com/">
-                    <i class="fab fa-pinterest-p"></i>
+                    <i className="fab fa-pinterest-p"></i>
                   </a>
                   <a href="https://twitter.com/">
-                    <i class="fab fa-twitter"></i>
+                    <i className="fab fa-twitter"></i>
                   </a>
                   <a href="https://google.com/">
-                    <i class="fab fa-google-plus-g"></i>
+                    <i className="fab fa-google-plus-g"></i>
                   </a>
                 </div>
               </div>

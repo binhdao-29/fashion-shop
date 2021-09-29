@@ -1,57 +1,56 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import cardEway from '../assets/images/cards/eway.svg';
-import cardCreadit from '../assets/images/cards/credit-card.svg';
-import cardWaller from '../assets/images/cards/google-wallet.svg';
-import cardPaypal from '../assets/images/cards/paypal.svg';
-import cardVisa from '../assets/images/cards/visa.svg';
+import cardEway from "../assets/images/cards/eway.svg";
+import cardCreadit from "../assets/images/cards/credit-card.svg";
+import cardWaller from "../assets/images/cards/google-wallet.svg";
+import cardPaypal from "../assets/images/cards/paypal.svg";
+import cardVisa from "../assets/images/cards/visa.svg";
 
 const categoryLinks = [
   {
     display: "Women",
-    path: "/"
+    path: "/",
   },
   {
     display: "Men",
-    path: "/"
+    path: "/",
   },
   {
     display: "Shoes",
-    path: "/"
+    path: "/",
   },
   {
     display: "Watches",
-    path: "/"
-  }
+    path: "/",
+  },
 ];
 
 const helpLinks = [
   {
     display: "Track Order",
-    path: "/"
+    path: "/",
   },
   {
     display: "Returns",
-    path: "/"
+    path: "/",
   },
   {
     display: "Shipping",
-    path: "/"
+    path: "/",
   },
   {
     display: "FAQs",
-    path: "/"
-  }
+    path: "/",
+  },
 ];
 
 const Footer = () => {
-
   const [textInput, setTextInput] = useState("");
 
   const onTextInputChange = (e) => {
     setTextInput(e.target.value);
-  }
+  };
 
   return (
     <div className="footer">
@@ -60,47 +59,51 @@ const Footer = () => {
           <div className="col-sm-6 col-lg-3 footer-block">
             <h4 className="footer__title">Categories</h4>
             <ul className="footer__content">
-              {
-                categoryLinks.map((item, index) => (
-                  <li key={index} className="footer__link">
-                    <Link to={item.path}>{item.display}</Link>
-                  </li>
-                ))
-              }
+              {categoryLinks.map((item, index) => (
+                <li key={index} className="footer__link">
+                  <Link to={item.path}>{item.display}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="col-sm-6 col-lg-3 footer-block">
             <h4 className="footer__title">Help</h4>
             <ul className="footer__content">
-              {
-                helpLinks.map((item, index) => (
-                  <li key={index} className="footer__link">
-                    <Link to={item.path}>{item.display}</Link>
-                  </li>
-                ))
-              }
+              {helpLinks.map((item, index) => (
+                <li key={index} className="footer__link">
+                  <Link to={item.path}>{item.display}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="col-sm-6 col-lg-3 footer-block">
             <h4 className="footer__title">Get in touch</h4>
-            <p className="footer__text" > 
-              Any questions? Let us know in store at 8th floor, 379 Lang St, 
-              Ha Noi, VN 10018 or call us on (+84) 96 716 6879
+            <p className="footer__text">
+              Any questions? Let us know in store at 8th floor, 379 Lang St, Ha
+              Noi, VN 10018 or call us on (+84) 96 716 6879
             </p>
             <ul className="footer__social">
               <li className="icon">
-                <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://facebook.com/">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
               </li>
               <li className="icon">
-                <a href="https://instagram.com/"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/">
+                  <i className="fab fa-instagram"></i>
+                </a>
               </li>
               <li className="icon">
-                <a href="https://youtube.com/"><i class="fab fa-youtube"></i></a>
+                <a href="https://youtube.com/">
+                  <i className="fab fa-youtube"></i>
+                </a>
               </li>
               <li className="icon">
-                <a href="https://pinterest.com/"><i class="fab fa-pinterest-p"></i></a>
+                <a href="https://pinterest.com/">
+                  <i className="fab fa-pinterest-p"></i>
+                </a>
               </li>
             </ul>
           </div>
@@ -109,8 +112,15 @@ const Footer = () => {
             <h4 className="footer__title">Newsletter</h4>
             <form>
               <div className="input-warper">
-                <input onChange={onTextInputChange} type="text" name="email" placeholder="email@example.com" />
-                <div className={`focus-input ${textInput !== "" ? 'active': ''}`}></div>
+                <input
+                  onChange={onTextInputChange}
+                  type="text"
+                  name="email"
+                  placeholder="email@example.com"
+                />
+                <div
+                  className={`focus-input ${textInput !== "" ? "active" : ""}`}
+                ></div>
               </div>
               <button className="footer-btn cb-btn">Subscribe</button>
             </form>
@@ -136,13 +146,15 @@ const Footer = () => {
           </div>
           <p className="copyright footer__text">
             {`Copyright © ${new Date().getFullYear()} All rights reserved | Made with `}
-            <i class="far fa-heart"></i>&nbsp;by
-            <a href="https://gracious-tereshkova-96f598.netlify.app/">&nbsp;CongBinh</a>
+            <i className="far fa-heart"></i>&nbsp;by
+            <a href="https://gracious-tereshkova-96f598.netlify.app/">
+              &nbsp;CongBinh
+            </a>
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

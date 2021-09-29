@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom';
 
 import reportWebVitals from './reportWebVitals';
 
-import Laypout from './components/Laypout.jsx';
-
-
+import Layout from './components/Layout';
 import './sass/index.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Laypout />
+    <Layout />
   </React.StrictMode>,
   document.getElementById('root')
 );
