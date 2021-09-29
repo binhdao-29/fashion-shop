@@ -1,7 +1,14 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, {
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import Helmet from "../components/Helmet";
 import ProductCard from "../components/ProductCard";
 import CheckBox from "../components/CheckBox";
+import { AppContext } from "../context/AppProvider";
 
 import productData from "../assets/test-data/products";
 import categories from "../assets/test-data/categories";
@@ -20,6 +27,9 @@ const Catalog = () => {
 
   const [filter, setFilter] = useState(initFilter);
   const [products, setProducts] = useState(productList);
+
+  //if user click category in home page
+  const { categoryName } = useContext(AppContext);
 
   const inputSearchRef = useRef(null);
 
@@ -102,6 +112,16 @@ const Catalog = () => {
     updateProducts();
   }, [updateProducts]);
 
+  useEffect(() => {
+    if (categoryName) {
+      const list = productList.filter((p) => {
+        return p.category === categoryName;
+      });
+
+      setProducts(list);
+    }
+  }, [categoryName, productList]);
+
   return (
     <Helmet title="Catalog">
       <div className="catalog">
@@ -118,7 +138,7 @@ const Catalog = () => {
                 ref={inputSearchRef}
               />
               <button className="btn-search" onClick={searchItem}>
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
               </button>
             </div>
           </div>

@@ -124,7 +124,7 @@ function BlogPost({ imgUrl, title, text }) {
           </span>
           <a href="/blog">
             Continue Reading
-            <i class="fas fa-long-arrow-alt-right"></i>
+            <i className="fas fa-long-arrow-alt-right"></i>
           </a>
         </div>
       </div>
@@ -156,7 +156,7 @@ function Blog() {
                 <div className="search">
                   <input type="text" name="search" placeholder="Search" />
                   <button className="btn-search">
-                    <i class="fas fa-search"></i>
+                    <i className="fas fa-search"></i>
                   </button>
                 </div>
                 <div className="blog-menu">
