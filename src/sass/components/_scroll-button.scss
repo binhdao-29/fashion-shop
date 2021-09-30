@@ -1,0 +1,23 @@
+.btn-back-to-top {
+  position: fixed;
+  width: 40px;
+  height: 38px;
+  bottom: 0;
+  right: 40px;
+  background-color: var(--color-primary);
+  opacity: 0.5;
+  z-index: 1000;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  @include flex(center, center);
+
+  &:hover {
+    opacity: 1;
+  }
+
+  & .symbol-btn {
+    color: var(--color-light);
+    font-size: 18px;
+  }
+}

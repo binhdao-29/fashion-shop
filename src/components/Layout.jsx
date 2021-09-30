@@ -6,6 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Routes from "../routes/Routes";
 import AppProvider from "../context/AppProvider";
+import ScrollToTop from "./ScrollToTop";
 
 const Layout = () => {
   return (
@@ -20,6 +21,9 @@ const Layout = () => {
                 <div>
                   <Routes />
                 </div>
+
+                {/* Scroll to top button */}
+                <ScrollToTop />
 
                 <Footer />
               </div>
