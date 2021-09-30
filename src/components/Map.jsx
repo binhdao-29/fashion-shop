@@ -1,24 +1,30 @@
 import React from "react";
-import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+
+/* Change lat and lng for address */
+const address = {
+  lat: 20.980835487094875,
+  lng: 105.78792040504916,
+};
+
+const containerStyle = {
+  width: "100%",
+  height: "400px",
+};
 
 const Map = () => {
-  return (
-    <div>
-      <GoogleMap
-        defaultZoom={12}
-        defaultCenter={{ lat: 20.980835487094875, lng: 105.78792040504916 }}
-      >
-        <Marker
-          position={{ lat: 20.980835487094875, lng: 105.78792040504916 }}
-        />
-      </GoogleMap>
-    </div>
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyB-zEex5XIZ7DOamNn0OkIWV55WlnQR5qI",
+  });
+
+  return isLoaded ? (
+    <GoogleMap mapContainerStyle={containerStyle} zoom={12} center={address}>
+      <Marker position={{ lat: 20.980835487094875, lng: 105.78792040504916 }} />
+    </GoogleMap>
+  ) : (
+    <></>
   );
 };
 
-export default withScriptjs(withGoogleMap(Map));
+export default React.memo(Map);

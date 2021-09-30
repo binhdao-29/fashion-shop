@@ -40,7 +40,7 @@ const Contact = () => {
               <form ref={form} onSubmit={sendEmail}>
                 <h4 className="title">send us a message</h4>
                 <div className="form-wrap">
-                  <i class="far fa-user-circle"></i>
+                  <i className="far fa-user-circle"></i>
                   <input
                     type="text"
                     className="form-input"
@@ -49,7 +49,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className="form-wrap">
-                  <i class="far fa-envelope"></i>
+                  <i className="far fa-envelope"></i>
                   <input
                     type="email"
                     className="form-input"
@@ -106,20 +106,7 @@ const Contact = () => {
       </div>
 
       {/* Google Map */}
-      <Map
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyB-zEex5XIZ7DOamNn0OkIWV55WlnQR5qI&callback=initMap`}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={
-          <div
-            style={{
-              height: `500px`,
-              margin: `auto`,
-              border: "none",
-            }}
-          />
-        }
-        mapElement={<div style={{ height: `100%` }} />}
-      />
+      <Map />
     </Helmet>
   );
 };
