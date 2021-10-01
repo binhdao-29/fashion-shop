@@ -15,6 +15,7 @@ import categories from "../assets/test-data/categories";
 import colors from "../assets/test-data/product-colors";
 import productSize from "../assets/test-data/product-size";
 import noResult from "../assets/images/post/no-result.png";
+import Pagination from "../components/Pagination";
 
 const Catalog = () => {
   const initFilter = {
@@ -27,12 +28,27 @@ const Catalog = () => {
 
   const [filter, setFilter] = useState(initFilter);
   const [products, setProducts] = useState(productList);
+  // const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [productsPerPage, setProductPerPage] = useState(12);
+
+  const productsPerPage = 12;
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+  const paginate = (pageNum) => setCurrentPage(pageNum);
+
+  const nextPage = () => setCurrentPage(currentPage + 1);
+
+  const prevPage = () => setCurrentPage(currentPage - 1);
 
   //if user click category in home page
   const { categoryName } = useContext(AppContext);
 
   const inputSearchRef = useRef(null);
 
+  //search product by name
   const searchItem = () => {
     const list = productList.filter((product) => {
       return product.title.toLowerCase().includes(inputSearchRef.current.value);
@@ -41,6 +57,7 @@ const Catalog = () => {
     setProducts(list);
   };
 
+  // filter product by category, color, size
   const filterSelect = (type, checked, item) => {
     if (checked) {
       switch (type) {
@@ -110,6 +127,8 @@ const Catalog = () => {
 
   useEffect(() => {
     updateProducts();
+
+    setCurrentPage(1);
   }, [updateProducts]);
 
   useEffect(() => {
@@ -197,13 +216,16 @@ const Catalog = () => {
               </div>
             </div>
 
+            {/* Render product */}
             <div className="catalog-content col-lg-10">
               <div className="container-fluid">
                 <div className="row">
                   {products.length > 0 ? (
-                    products.map((item, index) => (
-                      <ProductCard key={index} product={item} />
-                    ))
+                    products
+                      .slice(indexOfFirstProduct, indexOfLastProduct)
+                      .map((item, index) => (
+                        <ProductCard key={index} product={item} />
+                      ))
                   ) : (
                     <div className="no-result">
                       <img src={noResult} alt="" />
@@ -213,6 +235,14 @@ const Catalog = () => {
                   )}
                 </div>
               </div>
+              <Pagination
+                productsPerPage={productsPerPage}
+                totalProducts={products.length}
+                paginate={paginate}
+                nextPage={nextPage}
+                prevPage={prevPage}
+                currentPage={currentPage}
+              />
             </div>
           </div>
         </div>

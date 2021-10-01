@@ -1,0 +1,33 @@
+.pagination-container {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.page__list {
+  @include flex(center, center);
+
+  .page__item {
+    margin: 0px 5px;
+  }
+
+  .page__link {
+    display: inline-block;
+    cursor: pointer;
+    width: 25px;
+    height: 30px;
+    color: var(--color-dark);
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+    @include flex(center, center);
+
+    &.active {
+      color: var(--color-light);
+      background-color: var(--color-primary);
+    }
+
+    &:hover {
+      background-color: var(--color-light-secondary);
+    }
+  }
+}
