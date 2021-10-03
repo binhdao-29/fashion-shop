@@ -74,6 +74,7 @@ const women_product_43 = require('../images/products/women/wm4_03.jpeg').default
 
 const menProducts = [
   {
+    id: "1",
     title: "Shirt in Stretch Cotton",
     price: '18.49',
     image01: men_product_11,
@@ -86,6 +87,7 @@ const menProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "2",
     title: "Shirt in Stretch Cotton",
     price: '54.79',
     image01: men_product_21,
@@ -98,6 +100,7 @@ const menProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "3",
     title: "Shirt in Stretch Cotton",
     price: '18.49',
     image01: men_product_31,
@@ -110,6 +113,7 @@ const menProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "4",
     title: "Shirt in Stretch Cotton 05",
     price: '18.49',
     image01: men_product_41,
@@ -122,6 +126,7 @@ const menProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "5",
     title: "Shirt in Stretch Cotton 06",
     price: '18.49',
     image01: men_product_71,
@@ -134,6 +139,7 @@ const menProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "6",
     title: "Shirt in Stretch Cotton",
     price: '18.49',
     image01: men_product_81,
@@ -145,6 +151,7 @@ const menProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "7",
     title: "Shirt in Stretch Cotton 08",
     price: '18.49',
     image01: men_product_91,
@@ -157,6 +164,7 @@ const menProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "8",
     title: "Shirt in Stretch Cotton",
     price: '86.85',
     image01: men_product_101,
@@ -169,6 +177,7 @@ const menProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "9",
     title: "Shirt in Stretch Cotton",
     price: '86.85',
     image01: men_product_111,
@@ -184,6 +193,7 @@ const menProducts = [
 
 const accessories = [
   {
+    id: "10",
     title: "Derby",
     price: '86.85',
     image01: as_product_11,
@@ -196,6 +206,7 @@ const accessories = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "11",
     title: "Derby",
     price: '186.85',
     image01: as_product_41,
@@ -208,6 +219,7 @@ const accessories = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "12",
     title: "Derby",
     price: '186.85',
     image01: as_product_51,
@@ -219,6 +231,7 @@ const accessories = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "13",
     title: "Shoes",
     price: '86.85',
     image01: as_product_61,
@@ -230,6 +243,7 @@ const accessories = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "14",
     title: "Derby 2021",
     price: '186.85',
     image01: as_product_21,
@@ -241,6 +255,7 @@ const accessories = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "15",
     title: "Shoes 2021",
     price: '106.85',
     image01: as_product_71,
@@ -252,13 +267,14 @@ const accessories = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
   },
   {
+    id: "16",
     title: "Shoes 2021",
     price: '186.85',
     image01: as_product_81,
     image02: as_product_82,
     image03: as_product_83,
     category: "Accessories",
-    colors: ["Sienna","blue"],
+    colors: ["Sienna", "blue"],
     slug: "accessories-13",
     size: ["s", "m", "xl"],
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat"
@@ -267,6 +283,7 @@ const accessories = [
 
 const womenProducts = [
   {
+    id: "17",
     title: "T-shirt",
     price: '60.85',
     image01: women_product_11,
@@ -278,6 +295,7 @@ const womenProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.Nam vitae luctus ligula. Mauris consequat ornare feugiat."
   },
   {
+    id: "18",
     title: "Polo",
     price: '86.85',
     image01: women_product_21,
@@ -289,6 +307,7 @@ const womenProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.Nam vitae luctus ligula. Mauris consequat ornare feugiat."
   },
   {
+    id: "19",
     title: "Derby",
     price: '86.85',
     image01: women_product_31,
@@ -301,6 +320,7 @@ const womenProducts = [
     des: "Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.Nam vitae luctus ligula. Mauris consequat ornare feugiat."
   },
   {
+    id: "20",
     title: "Derby",
     price: '86.85',
     image01: women_product_41,
@@ -326,10 +346,10 @@ const getProducts = (count) => {
 
 const getProductsBySlug = (slug) => products.find(p => p.slug === slug);
 
-const productData = { 
+const productData = {
   getAllProducts,
   getProducts,
   getProductsBySlug
 }
 
-export default productData 
+export default productData

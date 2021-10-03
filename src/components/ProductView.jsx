@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import PropTypes from "prop-types";
 import SuccessModal from "./SuccessModal";
+import { AppContext } from "../context/AppProvider";
 
 const ProductView = ({ product, display, setDisplay }) => {
+  const { cart, setCart } = useContext(AppContext);
+
   const [imageCurrent, setImageCurrent] = useState(product.image01);
 
   const [color, setColor] = useState(undefined);
@@ -50,6 +53,15 @@ const ProductView = ({ product, display, setDisplay }) => {
 
   const addToCart = () => {
     if (checkUndefined()) {
+      const newCart = [
+        ...cart,
+        {
+          ...product,
+          quantity: quantity,
+        },
+      ];
+
+      setCart(newCart);
       setSuccess(true);
     }
   };

@@ -10,7 +10,6 @@ import ProductCard from "../components/ProductCard";
 import CheckBox from "../components/CheckBox";
 import { AppContext } from "../context/AppProvider";
 
-import productData from "../assets/test-data/products";
 import categories from "../assets/test-data/categories";
 import colors from "../assets/test-data/product-colors";
 import productSize from "../assets/test-data/product-size";
@@ -24,10 +23,10 @@ const Catalog = () => {
     size: [],
   };
 
-  const productList = productData.getAllProducts();
+  const { allProducts, categoryName } = useContext(AppContext);
 
   const [filter, setFilter] = useState(initFilter);
-  const [products, setProducts] = useState(productList);
+  const [products, setProducts] = useState(allProducts);
   // const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   // const [productsPerPage, setProductPerPage] = useState(12);
@@ -43,14 +42,11 @@ const Catalog = () => {
 
   const prevPage = () => setCurrentPage(currentPage - 1);
 
-  //if user click category in home page
-  const { categoryName } = useContext(AppContext);
-
   const inputSearchRef = useRef(null);
 
   //search product by name
   const searchItem = () => {
-    const list = productList.filter((product) => {
+    const list = allProducts.filter((product) => {
       return product.title.toLowerCase().includes(inputSearchRef.current.value);
     });
 
@@ -102,7 +98,7 @@ const Catalog = () => {
   const clearFilter = () => setFilter(initFilter);
 
   const updateProducts = useCallback(() => {
-    let list = productList;
+    let list = allProducts;
 
     if (filter.category.length > 0) {
       list = list.filter((p) => {
@@ -123,7 +119,7 @@ const Catalog = () => {
     }
 
     setProducts(list);
-  }, [filter, productList]);
+  }, [filter, allProducts]);
 
   useEffect(() => {
     updateProducts();
@@ -133,13 +129,13 @@ const Catalog = () => {
 
   useEffect(() => {
     if (categoryName) {
-      const list = productList.filter((p) => {
+      const list = allProducts.filter((p) => {
         return p.category === categoryName;
       });
 
       setProducts(list);
     }
-  }, [categoryName, productList]);
+  }, [categoryName, allProducts]);
 
   return (
     <Helmet title="Catalog">
