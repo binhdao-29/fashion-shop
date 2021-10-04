@@ -84,7 +84,7 @@ const Header = () => {
 
   const toggleMenu = () => {
     navRef.current.classList.toggle("nav-open");
-    headerMenuRef.current.classList.toggle("header__menu--open");
+    headerMenuRef.current.classList.toggle("active");
   };
 
   return (
@@ -97,29 +97,32 @@ const Header = () => {
               <span>store</span>
             </Link>
           </div>
-          <div className="header__menu" ref={headerMenuRef}>
-            {mainNav.map((item, index) => (
-              <div
-                onClick={toggleMenu}
-                key={index}
-                className={`header__item ${
-                  index === activeNav ? "active" : ""
-                }`}
-              >
-                <Link to={item.path}>
-                  <span>{item.display}</span>
-                </Link>
-              </div>
-            ))}
+          <div className="header-menu-wrap" ref={headerMenuRef}>
+            <div className="header__menu--overlay" onClick={toggleMenu}></div>
+            <div className="header__menu">
+              {mainNav.map((item, index) => (
+                <div
+                  onClick={toggleMenu}
+                  key={index}
+                  className={`header__item ${
+                    index === activeNav ? "active" : ""
+                  }`}
+                >
+                  <Link to={item.path}>
+                    <span>{item.display}</span>
+                  </Link>
+                </div>
+              ))}
 
-            <div className="header-info">
-              <span className="name">@ CocaStore</span>
-              <div className="gallery">
-                {gallery.map((item, index) => (
-                  <div key={index} className="wrap-item-gallery">
-                    <img src={item.img} alt="" />
-                  </div>
-                ))}
+              <div className="header-info">
+                <span className="name">@ CocaStore</span>
+                <div className="gallery">
+                  {gallery.map((item, index) => (
+                    <div key={index} className="wrap-item-gallery">
+                      <img src={item.img} alt="" />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

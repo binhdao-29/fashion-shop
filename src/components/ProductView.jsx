@@ -86,6 +86,8 @@ const ProductView = ({ product, display, setDisplay }) => {
 
         setCart(newCart);
       }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
       setSuccess(true);
     }
   };

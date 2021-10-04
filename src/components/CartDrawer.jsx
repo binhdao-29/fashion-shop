@@ -28,6 +28,7 @@ export default function CartDrawer({ isVisible, handleClickCart }) {
       (item) => item.id !== id || item.color !== color || item.size !== size
     );
     setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
   return (
