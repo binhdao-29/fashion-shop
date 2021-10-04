@@ -13,7 +13,7 @@ import CartDrawer from "./CartDrawer";
 const mainNav = [
   {
     display: "Home",
-    path: "/",
+    path: "/fashion-shop",
   },
   {
     display: "Products",
@@ -97,7 +97,7 @@ const Header = () => {
       <div className="header" ref={headerRef}>
         <div className="header-container container">
           <div className="header__logo">
-            <Link to="/">
+            <Link to="/fashion-shop">
               <strong>coca</strong>
               <span>store</span>
             </Link>

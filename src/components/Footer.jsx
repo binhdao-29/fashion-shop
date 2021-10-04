@@ -10,38 +10,38 @@ import cardVisa from "../assets/images/cards/visa.svg";
 const categoryLinks = [
   {
     display: "Women",
-    path: "/",
+    path: "/catalog",
   },
   {
     display: "Men",
-    path: "/",
+    path: "/catalog",
   },
   {
     display: "Shoes",
-    path: "/",
+    path: "/catalog",
   },
   {
     display: "Watches",
-    path: "/",
+    path: "/catalog",
   },
 ];
 
 const helpLinks = [
   {
     display: "Track Order",
-    path: "/",
+    path: "/contact",
   },
   {
     display: "Returns",
-    path: "/",
+    path: "/contact",
   },
   {
     display: "Shipping",
-    path: "/",
+    path: "/contact",
   },
   {
     display: "FAQs",
-    path: "/",
+    path: "/contact",
   },
 ];
 
@@ -128,19 +128,19 @@ const Footer = () => {
         </div>
         <div className="footer-bottom">
           <div className="cards">
-            <a href="/">
+            <a href="/fashion-shop">
               <img src={cardCreadit} alt="" />
             </a>
-            <a href="/">
+            <a href="/fashion-shop">
               <img src={cardEway} alt="" />
             </a>
-            <a href="/">
+            <a href="/fashion-shop">
               <img src={cardPaypal} alt="" />
             </a>
-            <a href="/">
+            <a href="/fashion-shop">
               <img src={cardVisa} alt="" />
             </a>
-            <a href="/">
+            <a href="/fashion-shop">
               <img src={cardWaller} alt="" />
             </a>
           </div>
