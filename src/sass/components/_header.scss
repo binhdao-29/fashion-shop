@@ -44,6 +44,13 @@
     visibility: hidden;
     transition: all 0.4s;
 
+    @include responsive(LG) {
+      position: relative;
+      height: auto;
+      visibility: visible;
+      background-color: transparent;
+    }
+
     &.active {
       visibility: visible;
       background-color: rgba(0, 0, 0, 0.6);
@@ -80,6 +87,7 @@
 
       position: relative;
       inset: 6px 0;
+      width: 100%;
       background: transparent;
       padding: unset;
       color: var(--color-light);

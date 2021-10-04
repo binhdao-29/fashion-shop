@@ -87,6 +87,11 @@ const Header = () => {
     headerMenuRef.current.classList.toggle("active");
   };
 
+  const handleClickCloseMenu = () => {
+    navRef.current.classList.remove("nav-open");
+    headerMenuRef.current.classList.remove("active");
+  };
+
   return (
     <>
       <div className="header" ref={headerRef}>
@@ -98,11 +103,14 @@ const Header = () => {
             </Link>
           </div>
           <div className="header-menu-wrap" ref={headerMenuRef}>
-            <div className="header__menu--overlay" onClick={toggleMenu}></div>
+            <div
+              className="header__menu--overlay"
+              onClick={handleClickCloseMenu}
+            ></div>
             <div className="header__menu">
               {mainNav.map((item, index) => (
                 <div
-                  onClick={toggleMenu}
+                  onClick={handleClickCloseMenu}
                   key={index}
                   className={`header__item ${
                     index === activeNav ? "active" : ""
