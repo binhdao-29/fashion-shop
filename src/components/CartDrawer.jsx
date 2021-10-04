@@ -23,8 +23,10 @@ export default function CartDrawer({ isVisible, handleClickCart }) {
     return total.toFixed(2);
   };
 
-  const deleteItem = (index) => {
-    const newCart = cart.splice(index, 1);
+  const deleteItem = (id, color, size) => {
+    const newCart = cart.filter(
+      (item) => item.id !== id || item.color !== color || item.size !== size
+    );
     setCart(newCart);
   };
 
@@ -47,7 +49,7 @@ export default function CartDrawer({ isVisible, handleClickCart }) {
             {cart.map((item, index) => (
               <li key={index} className="cart__item">
                 <div
-                  onClick={() => deleteItem(index + 1)}
+                  onClick={() => deleteItem(item.id, item.color, item.size)}
                   className="item__image"
                 >
                   <img src={item.image01} alt="" />

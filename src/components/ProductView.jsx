@@ -29,13 +29,19 @@ const ProductView = ({ product, display, setDisplay }) => {
 
   const toggleSuccessModal = (isToggle) => {
     setSuccess(isToggle);
+    setQuantity(1);
+    setColor(undefined);
+    setSize(undefined);
   };
 
   useEffect(() => {
     setImageCurrent(product.image01);
-    setQuantity(1);
-    setColor(undefined);
-    setSize(undefined);
+
+    return () => {
+      setQuantity(1);
+      setColor(undefined);
+      setSize(undefined);
+    };
   }, [product]);
 
   const checkUndefined = () => {
@@ -53,15 +59,33 @@ const ProductView = ({ product, display, setDisplay }) => {
 
   const addToCart = () => {
     if (checkUndefined()) {
-      const newCart = [
-        ...cart,
-        {
-          ...product,
-          quantity: quantity,
-        },
-      ];
+      let isUpdated = false;
 
-      setCart(newCart);
+      cart.forEach((item) => {
+        if (
+          item.id === product.id &&
+          item.color === color &&
+          item.size === size
+        ) {
+          item.quantity += quantity;
+          isUpdated = true;
+          return;
+        }
+      });
+
+      if (!isUpdated) {
+        const newCart = [
+          ...cart,
+          {
+            ...product,
+            quantity: quantity,
+            color: color,
+            size: size,
+          },
+        ];
+
+        setCart(newCart);
+      }
       setSuccess(true);
     }
   };
@@ -93,21 +117,21 @@ const ProductView = ({ product, display, setDisplay }) => {
                     onClick={() => setImageCurrent(product.image01)}
                     className="image__list__item"
                   >
-                    <img src={product.image01} alt="" />
+                    {product.image01 && <img src={product.image01} alt="" />}
                     <div className="overlay"></div>
                   </li>
                   <li
                     onClick={() => setImageCurrent(product.image02)}
                     className="image__list__item"
                   >
-                    <img src={product.image02} alt="" />
+                    {product.image02 && <img src={product.image02} alt="" />}
                     <div className="overlay"></div>
                   </li>
                   <li
                     onClick={() => setImageCurrent(product.image03)}
                     className="image__list__item"
                   >
-                    <img src={product.image03} alt="" />
+                    {product.image03 && <img src={product.image03} alt="" />}
                     <div className="overlay"></div>
                   </li>
                 </ul>
