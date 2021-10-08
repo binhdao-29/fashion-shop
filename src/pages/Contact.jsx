@@ -5,25 +5,37 @@ import Map from "../components/Map";
 
 const Contact = () => {
   const form = useRef();
+  const inputUserRef = useRef(null);
+  const inputEmailRef = useRef(null);
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_4wu5sol",
-        "template_uxjt3x4",
-        form.current,
-        "user_m1aURoRd5zSkZOxHfyql3"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+    const userNameRegex = /^[a-zA-Z0-9]+$/;
+    const emailRegex = /^\w+@\w+(\.\w{2,3})+$/;
+
+    if (
+      emailRegex.test(inputEmailRef.current.value) &&
+      userNameRegex.test(inputUserRef.current.value)
+    ) {
+      emailjs
+        .sendForm(
+          "service_4wu5sol",
+          "template_uxjt3x4",
+          form.current,
+          "user_m1aURoRd5zSkZOxHfyql3"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    } else {
+      alert("Please check your name or your email!");
+    }
 
     e.target.reset();
   };
@@ -42,6 +54,7 @@ const Contact = () => {
                 <div className="form-wrap">
                   <i className="far fa-user-circle"></i>
                   <input
+                    ref={inputUserRef}
                     type="text"
                     className="form-input"
                     name="name"
@@ -51,6 +64,7 @@ const Contact = () => {
                 <div className="form-wrap">
                   <i className="far fa-envelope"></i>
                   <input
+                    ref={inputEmailRef}
                     type="email"
                     className="form-input"
                     name="email"
