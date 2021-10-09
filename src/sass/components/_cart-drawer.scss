@@ -166,8 +166,10 @@
 
     .cart__button {
       @include flex(center, space-between);
+      flex-wrap: wrap;
 
       .cb-btn {
+        margin-top: 10px;
         min-width: 145px;
         height: 40px;
         font-size: 15px;
@@ -181,7 +183,7 @@
         }
 
         &:first-child {
-          margin-right: 8px;
+          margin-right: 6px;
         }
       }
     }

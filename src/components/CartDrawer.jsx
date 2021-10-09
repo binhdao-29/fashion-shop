@@ -1,9 +1,16 @@
 import React, { useContext, useRef } from "react";
+import { useHistory } from "react-router";
 import { AppContext } from "../context/AppProvider";
 
 export default function CartDrawer({ isVisible, handleClickCart }) {
   const { cart, setCart } = useContext(AppContext);
   const cartDrawerRef = useRef(null);
+  const history = useHistory();
+
+  const handleClickViewCart = () => {
+    history.push("/cart");
+    handleClickCart(false);
+  };
 
   const handleClick = () => {
     handleClickCart(false);
@@ -67,7 +74,9 @@ export default function CartDrawer({ isVisible, handleClickCart }) {
           <div className="cart__footer">
             <div className="cart__total">{`Total: $${totalPrice()}`}</div>
             <div className="cart__button">
-              <button className="cb-btn">View cart</button>
+              <div className="cb-btn" onClick={handleClickViewCart}>
+                View cart
+              </div>
               <button className="cb-btn">Check out</button>
             </div>
           </div>

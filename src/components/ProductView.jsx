@@ -53,6 +53,10 @@ const ProductView = ({ product, display, setDisplay }) => {
       alert("You haven't chosen a size yet!");
       return false;
     }
+    if (quantity === 0) {
+      alert("You haven't chosen quantity of product yet!");
+      return false;
+    }
 
     return true;
   };

@@ -6,6 +6,7 @@ import Catalog from "../pages/Catalog";
 import Blog from "../pages/Blog";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import Cart from "../pages/Cart";
 
 const Routes = () => {
   return (
@@ -16,6 +17,7 @@ const Routes = () => {
         <Route path="/blog" component={Blog} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
+        <Route path="/cart" component={Cart} />
       </Switch>
     </div>
   );
