@@ -28,6 +28,7 @@ const Contact = () => {
         .then(
           (result) => {
             console.log(result.text);
+            alert("Thank you for your feedback!");
           },
           (error) => {
             console.log(error.text);

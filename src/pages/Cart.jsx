@@ -1,13 +1,27 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import Helmet from "../components/Helmet";
+import { useHistory } from "react-router";
 import { AppContext } from "../context/AppProvider";
 
-const CartItem = ({ item, updateItem, index }) => {
+const shippingUnits = [
+  {
+    name: "Economical delivery",
+    cost: 5,
+  },
+  {
+    name: "Fast delivery",
+    cost: 10,
+  },
+];
+
+const CartItem = ({ item, updateItem, index, deleteItem, discount }) => {
   const [currentQuantity, setCurrentQuantity] = useState(0);
+  const [discountPrice, setDiscountPrice] = useState(0);
 
   useEffect(() => {
     setCurrentQuantity(item.quantity);
-  }, [item]);
+    setDiscountPrice((item.price - (item.price * discount) / 100).toFixed(2));
+  }, [item, discount]);
 
   const priceItem = (quantity, price) => {
     const result = quantity * parseFloat(price);
@@ -35,12 +49,21 @@ const CartItem = ({ item, updateItem, index }) => {
   return (
     <tr className="table__row">
       <td>
-        <div className="product__image">
+        <div onClick={() => deleteItem(item)} className="product__image">
           <img src={item.image01} alt="" />
         </div>
         <span className="title">{item.title}</span>
       </td>
-      <td>$ {item.price}</td>
+      <td>
+        {discount > 0 ? (
+          <div>
+            <div className="discount-price">$ {item.price}</div>
+            <div>$ {discountPrice}</div>
+          </div>
+        ) : (
+          <div>$ {item.price}</div>
+        )}
+      </td>
       <td>
         <div className="wrap-num-product">
           <div className="btn-num-product" onClick={() => updateQuantity("-")}>
@@ -54,7 +77,7 @@ const CartItem = ({ item, updateItem, index }) => {
           </div>
         </div>
       </td>
-      <td>{`$ ${priceItem(item.quantity, item.price)}`}</td>
+      <td>{`$ ${priceItem(item.quantity, discountPrice)}`}</td>
     </tr>
   );
 };
@@ -62,17 +85,73 @@ const CartItem = ({ item, updateItem, index }) => {
 export default function Cart() {
   const { cart, setCart } = useContext(AppContext);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [totalInvoice, setTotalInvoice] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
+  const history = useHistory();
+  const inpVoucherRef = useRef(null);
+  const selectShippingRef = useRef(null);
 
   useEffect(() => {
-    setTotalPrice(
-      cart.reduce((a, b) => parseFloat(b.price) * b.quantity + a, 0).toFixed(2)
-    );
-  }, [cart]);
+    const total = cart
+      .reduce((a, b) => parseFloat(b.price) * b.quantity + a, 0)
+      .toFixed(2);
+    if (discount > 0) {
+      setTotalPrice((total - (total * discount) / 100).toFixed(2));
+      setTotalInvoice((total - (total * discount) / 100).toFixed(2));
+    } else {
+      setTotalPrice(total);
+      setTotalInvoice(total);
+    }
+  }, [cart, discount]);
+
+  const backToCatalog = () => {
+    history.push("/catalog");
+  };
 
   const updateItem = (item, index) => {
     const newCart = [...cart.slice(0, index), item, ...cart.slice(index + 1)];
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
+  };
+
+  const deleteItem = (item) => {
+    const newCart = cart.filter(
+      (i) => i.id !== item.id || i.color !== item.color || i.size !== item.size
+    );
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  };
+
+  const applyVoucher = () => {
+    if (inpVoucherRef.current.value === "COCA-VOUCHER") {
+      setDiscount(20);
+    } else {
+      setDiscount(0);
+      alert("You haven't any voucher!");
+    }
+  };
+
+  const handleChangeShipping = () => {
+    setDeliveryCharge(selectShippingRef.current.value);
+  };
+
+  const updateTotals = () => {
+    if (deliveryCharge > 0) {
+      if (totalInvoice <= totalPrice) {
+        setTotalInvoice(
+          (parseFloat(totalInvoice) + parseFloat(deliveryCharge)).toFixed(2)
+        );
+      } else {
+        alert("You have chose a company shipping!");
+      }
+    } else {
+      alert("Please choose a company shipping!");
+    }
+  };
+
+  const checkOut = () => {
+    alert("Checkout success!");
   };
 
   return (
@@ -101,8 +180,10 @@ export default function Cart() {
                       <CartItem
                         key={index}
                         item={item}
-                        updateItem={updateItem}
                         index={index}
+                        discount={discount}
+                        updateItem={updateItem}
+                        deleteItem={deleteItem}
                       />
                     ))}
                   </tbody>
@@ -110,10 +191,18 @@ export default function Cart() {
               </div>
               <div className="cart-footer">
                 <div className="voucher-form">
-                  <input type="text" placeholder="Voucher Code" />
-                  <div className="cb-btn">apply voucher</div>
+                  <input
+                    ref={inpVoucherRef}
+                    type="text"
+                    placeholder="Voucher Code"
+                  />
+                  <div onClick={applyVoucher} className="cb-btn">
+                    apply voucher
+                  </div>
                 </div>
-                <div className="cb-btn">update cart</div>
+                <div onClick={backToCatalog} className="cb-btn">
+                  continue shopping
+                </div>
               </div>
             </div>
           </div>
@@ -129,10 +218,17 @@ export default function Cart() {
                 <div className="shipping__info">
                   <span className="text">company shipping</span>
                   <div className="form-select">
-                    <select className="shipping-select">
-                      <option>Select a company shipping</option>
-                      <option>Economical delivery</option>
-                      <option>Fast delivery</option>
+                    <select
+                      ref={selectShippingRef}
+                      className="shipping-select"
+                      onChange={handleChangeShipping}
+                    >
+                      <option value={0}>Select a company shipping</option>
+                      {shippingUnits.map((shipping, index) => (
+                        <option key={index} value={shipping.cost}>
+                          {shipping.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="form-input">
@@ -141,15 +237,19 @@ export default function Cart() {
                   <div className="form-input">
                     <input type="text" placeholder="Address" />
                   </div>
-                  <div className="cb-btn">Update totals</div>
+                  <div onClick={updateTotals} className="cb-btn">
+                    Update totals
+                  </div>
                 </div>
               </div>
               <div className="shipping-footer">
                 <div className="invoice-block--end invoice-block">
                   <span className="title">Total:</span>
-                  <div className="total-price">{`$ ${totalPrice}`}</div>
+                  <div className="total-price">{`$ ${totalInvoice}`}</div>
                 </div>
-                <div className="cb-btn">proceed to checkout</div>
+                <div className="cb-btn" onClick={checkOut}>
+                  proceed to checkout
+                </div>
               </div>
             </div>
           </div>
