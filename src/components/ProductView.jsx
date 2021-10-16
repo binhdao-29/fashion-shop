@@ -77,6 +77,8 @@ const ProductView = ({ product, display, setDisplay }) => {
         }
       });
 
+      localStorage.setItem("cart", JSON.stringify(cart));
+
       if (!isUpdated) {
         const newCart = [
           ...cart,
@@ -89,9 +91,9 @@ const ProductView = ({ product, display, setDisplay }) => {
         ];
 
         setCart(newCart);
+        localStorage.setItem("cart", JSON.stringify(newCart));
       }
 
-      localStorage.setItem("cart", JSON.stringify(cart));
       setSuccess(true);
     }
   };
