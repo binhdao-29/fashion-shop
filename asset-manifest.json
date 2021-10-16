@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/fashion-shop/static/css/main.9db40b7c.chunk.css",
-    "main.js": "/fashion-shop/static/js/main.e5c71ca0.chunk.js",
-    "main.js.map": "/fashion-shop/static/js/main.e5c71ca0.chunk.js.map",
+    "main.css": "/fashion-shop/static/css/main.d4e3d467.chunk.css",
+    "main.js": "/fashion-shop/static/js/main.247d6a8d.chunk.js",
+    "main.js.map": "/fashion-shop/static/js/main.247d6a8d.chunk.js.map",
     "runtime-main.js": "/fashion-shop/static/js/runtime-main.a4c567b7.js",
     "runtime-main.js.map": "/fashion-shop/static/js/runtime-main.a4c567b7.js.map",
     "static/css/2.a1ef74c9.chunk.css": "/fashion-shop/static/css/2.a1ef74c9.chunk.css",
-    "static/js/2.2221ab7d.chunk.js": "/fashion-shop/static/js/2.2221ab7d.chunk.js",
-    "static/js/2.2221ab7d.chunk.js.map": "/fashion-shop/static/js/2.2221ab7d.chunk.js.map",
+    "static/js/2.83132609.chunk.js": "/fashion-shop/static/js/2.83132609.chunk.js",
+    "static/js/2.83132609.chunk.js.map": "/fashion-shop/static/js/2.83132609.chunk.js.map",
     "static/js/3.d7ed4f3f.chunk.js": "/fashion-shop/static/js/3.d7ed4f3f.chunk.js",
     "static/js/3.d7ed4f3f.chunk.js.map": "/fashion-shop/static/js/3.d7ed4f3f.chunk.js.map",
     "index.html": "/fashion-shop/index.html",
     "static/css/2.a1ef74c9.chunk.css.map": "/fashion-shop/static/css/2.a1ef74c9.chunk.css.map",
-    "static/css/main.9db40b7c.chunk.css.map": "/fashion-shop/static/css/main.9db40b7c.chunk.css.map",
-    "static/js/2.2221ab7d.chunk.js.LICENSE.txt": "/fashion-shop/static/js/2.2221ab7d.chunk.js.LICENSE.txt",
-    "static/media/index.scss": "/fashion-shop/static/media/blog_banner.e031ecc6.jpg",
+    "static/css/main.d4e3d467.chunk.css.map": "/fashion-shop/static/css/main.d4e3d467.chunk.css.map",
+    "static/js/2.83132609.chunk.js.LICENSE.txt": "/fashion-shop/static/js/2.83132609.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/fashion-shop/static/media/cart-banner.81923743.jpg",
     "static/media/about_image01.0489d139.jpg": "/fashion-shop/static/media/about_image01.0489d139.jpg",
     "static/media/about_image02.c659cf23.jpg": "/fashion-shop/static/media/about_image02.c659cf23.jpg",
     "static/media/as10_01.jpeg": "/fashion-shop/static/media/as10_01.d651023e.jpeg",
@@ -95,8 +95,8 @@
   "entrypoints": [
     "static/js/runtime-main.a4c567b7.js",
     "static/css/2.a1ef74c9.chunk.css",
-    "static/js/2.2221ab7d.chunk.js",
-    "static/css/main.9db40b7c.chunk.css",
-    "static/js/main.e5c71ca0.chunk.js"
+    "static/js/2.83132609.chunk.js",
+    "static/css/main.d4e3d467.chunk.css",
+    "static/js/main.247d6a8d.chunk.js"
   ]
 }
