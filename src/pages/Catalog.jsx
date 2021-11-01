@@ -231,14 +231,16 @@ const Catalog = () => {
                   )}
                 </div>
               </div>
-              <Pagination
-                productsPerPage={productsPerPage}
-                totalProducts={products.length}
-                paginate={paginate}
-                nextPage={nextPage}
-                prevPage={prevPage}
-                currentPage={currentPage}
-              />
+              {products.length > 0 && (
+                <Pagination
+                  productsPerPage={productsPerPage}
+                  totalProducts={products.length}
+                  paginate={paginate}
+                  nextPage={nextPage}
+                  prevPage={prevPage}
+                  currentPage={currentPage}
+                />
+              )}
             </div>
           </div>
         </div>

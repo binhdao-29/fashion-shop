@@ -6,7 +6,14 @@ export const AppContext = React.createContext();
 export default function AppProvider({ children }) {
   const [categoryName, setCategoryName] = useState("");
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
   const allProducts = productData.getAllProducts();
+
+  useEffect(() => {
+    fetch("http://localhost:8080/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
 
   useEffect(() => {
     const localCart = localStorage.getItem("cart");
@@ -16,7 +23,14 @@ export default function AppProvider({ children }) {
 
   return (
     <AppContext.Provider
-      value={{ categoryName, setCategoryName, allProducts, cart, setCart }}
+      value={{
+        products,
+        categoryName,
+        setCategoryName,
+        allProducts,
+        cart,
+        setCart,
+      }}
     >
       {children}
     </AppContext.Provider>
