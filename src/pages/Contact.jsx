@@ -93,7 +93,7 @@ const Contact = () => {
                 <div className="info__content">
                   <span className="info__title">Address</span>
                   <p className="info__text">
-                    CoCa Store Center 8th floor, 379 Lang St, Ha Noi, 10018 VN
+                    Binh Store Center 8th floor, 379 Lang St, Ha Noi, 10018 VN
                   </p>
                 </div>
               </div>

@@ -1,0 +1,11 @@
+.product-upload {
+  span {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
+}
+.ant-upload-list {
+  display: flex !important;
+  column-gap: 10px;
+}

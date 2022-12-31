@@ -98,7 +98,7 @@ const Header = () => {
         <div className="header-container container">
           <div className="header__logo">
             <Link to="/fashion-shop">
-              <strong>coca</strong>
+              <strong>Binh</strong>
               <span>store</span>
             </Link>
           </div>
@@ -123,7 +123,7 @@ const Header = () => {
               ))}
 
               <div className="header-info">
-                <span className="name">@ CocaStore</span>
+                <span className="name">@ BinhStore</span>
                 <div className="gallery">
                   {gallery.map((item, index) => (
                     <div key={index} className="wrap-item-gallery">
@@ -135,9 +135,9 @@ const Header = () => {
             </div>
           </div>
           <div className="header__icon">
-            <div className="icon">
+            {/* <div className="icon">
               <i className="fas fa-search"></i>
-            </div>
+            </div> */}
             <div className="icon" onClick={() => setCartDrawerVisible(true)}>
               <i className="fas fa-shopping-cart"></i>
               {cart.length > 0 && (

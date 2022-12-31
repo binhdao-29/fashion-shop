@@ -85,9 +85,11 @@
   }
 
   .search-box {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
     margin-bottom: 20px;
-    margin-right: 25px;
+    margin-right: 15px;
   }
 
   .search {

@@ -2,15 +2,17 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import Helmet from "../components/Helmet";
 import { useHistory } from "react-router";
 import { AppContext } from "../context/AppProvider";
+import { urlFor } from "../lib/client";
+import { toast } from "react-hot-toast";
 
 const shippingUnits = [
   {
     name: "Economical delivery",
-    cost: 5,
+    cost: 50,
   },
   {
     name: "Fast delivery",
-    cost: 10,
+    cost: 100,
   },
 ];
 
@@ -50,9 +52,9 @@ const CartItem = ({ item, updateItem, index, deleteItem, discount }) => {
     <tr className="table__row">
       <td>
         <div onClick={() => deleteItem(item)} className="product__image">
-          <img src={item.image01} alt="" />
+          <img src={urlFor(item.image[0])} alt="" />
         </div>
-        <span className="title">{item.title}</span>
+        <span className="title">{item.name}</span>
       </td>
       <td>
         {discount > 0 ? (
@@ -150,8 +152,23 @@ export default function Cart() {
     }
   };
 
-  const checkOut = () => {
-    alert("Checkout success!");
+  const handleCheckout = async () => {
+    const response = await fetch("http://localhost:5000/payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cart),
+    });
+
+    const data = await response.json();
+
+    if (data?.url) {
+      toast.loading("Redirecting...");
+      window.location.assign(data.url);
+    } else {
+      toast.error("Checkout Failed. Please check again");
+    }
   };
 
   return (
@@ -247,7 +264,7 @@ export default function Cart() {
                   <span className="title">Total:</span>
                   <div className="total-price">{`$ ${totalInvoice}`}</div>
                 </div>
-                <div className="cb-btn" onClick={checkOut}>
+                <div className="cb-btn" onClick={handleCheckout}>
                   proceed to checkout
                 </div>
               </div>

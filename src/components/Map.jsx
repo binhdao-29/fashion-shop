@@ -19,7 +19,7 @@ const Map = () => {
   });
 
   return isLoaded ? (
-    <GoogleMap mapContainerStyle={containerStyle} zoom={12} center={address}>
+    <GoogleMap mapContainerStyle={containerStyle} zoom={14} center={address}>
       <Marker position={{ lat: 20.980835487094875, lng: 105.78792040504916 }} />
     </GoogleMap>
   ) : (

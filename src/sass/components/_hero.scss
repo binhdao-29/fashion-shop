@@ -15,19 +15,20 @@
     background-size: cover;
     padding: 100px 0 60px;
     color: var(--color-light);
-  
+
     @include flex-column(center, center);
-  
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
     }
-  
+
     .title {
+      color: #fff;
       font-size: 60px;
       font-weight: 700;
       line-height: 1.1;
@@ -37,9 +38,9 @@
       z-index: 10;
       opacity: 0;
       transform: translateY(110%);
-      transition: transform 1s ease 1s, opacity 1s ease 1s
+      transition: transform 1s ease 1s, opacity 1s ease 1s;
     }
-  
+
     .subtitle {
       font-family: var(--ff-second);
       font-size: 28px;
@@ -49,7 +50,7 @@
       transform: translateY(-150%);
       transition: transform 1s ease, opacity 1s ease;
     }
-  
+
     .hero-btn {
       background-color: var(--color-primary-dark);
       color: var(--color-light);
@@ -58,7 +59,7 @@
       opacity: 0;
       transform: scale(0.2);
       transition: transform 1s ease 1.5s, opacity 1s ease 1.5s;
-  
+
       &:hover {
         background-color: var(--color-light);
         color: var(--color-primary-dark);
@@ -94,7 +95,7 @@
     background-size: cover;
 
     &::after {
-      content: 'More';
+      content: "More";
       position: absolute;
       inset: 0;
       font-size: 18px;
@@ -117,7 +118,7 @@
   }
 
   .swiper-slide {
-    width: clamp(100px , calc((80% - 190px) / 3), 190px) !important;
+    width: clamp(100px, calc((80% - 190px) / 3), 190px) !important;
     height: 100px;
     margin-left: 1px;
   }

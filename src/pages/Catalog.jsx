@@ -11,15 +11,16 @@ import CheckBox from "../components/CheckBox";
 import { AppContext } from "../context/AppProvider";
 
 import categories from "../assets/test-data/categories";
-import colors from "../assets/test-data/product-colors";
 import productSize from "../assets/test-data/product-size";
 import noResult from "../assets/images/post/no-result.png";
 import Pagination from "../components/Pagination";
+import subCategories from "../assets/test-data/sub-categories";
+import UploadSearch from "../components/UploadSearch";
 
 const Catalog = () => {
   const initFilter = {
     category: [],
-    color: [],
+    subCategory: [],
     size: [],
   };
 
@@ -29,6 +30,7 @@ const Catalog = () => {
   const [products, setProducts] = useState(allProducts);
   // const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [categoryLabel, setCategoryLabel] = useState(1);
   // const [productsPerPage, setProductPerPage] = useState(12);
 
   const productsPerPage = 12;
@@ -47,13 +49,13 @@ const Catalog = () => {
   //search product by name
   const searchItem = () => {
     const list = allProducts.filter((product) => {
-      return product.title.toLowerCase().includes(inputSearchRef.current.value);
+      return product.name.toLowerCase().includes(inputSearchRef.current.value);
     });
 
     setProducts(list);
   };
 
-  // filter product by category, color, size
+  // filter product by category, subCategory, size
   const filterSelect = (type, checked, item) => {
     if (checked) {
       switch (type) {
@@ -63,8 +65,11 @@ const Catalog = () => {
             category: [...filter.category, item.category],
           });
           break;
-        case "COLOR":
-          setFilter({ ...filter, color: [...filter.color, item.color] });
+        case "SUBCATEGORY":
+          setFilter({
+            ...filter,
+            subCategory: [...filter.subCategory, item.subCategory],
+          });
           break;
         case "SIZE":
           setFilter({ ...filter, size: [...filter.size, item.size] });
@@ -80,9 +85,11 @@ const Catalog = () => {
           );
           setFilter({ ...filter, category: newCategory });
           break;
-        case "COLOR":
-          const newColor = filter.color.filter((p) => p !== item.color);
-          setFilter({ ...filter, color: newColor });
+        case "SUBCATEGORY":
+          const newSubCategory = filter.subCategory.filter(
+            (p) => p !== item.subCategory
+          );
+          setFilter({ ...filter, subCategory: newSubCategory });
           break;
         case "SIZE":
           const newSize = filter.size.filter((p) => p !== item.size);
@@ -99,21 +106,19 @@ const Catalog = () => {
 
   const updateProducts = useCallback(() => {
     let list = allProducts;
-
     if (filter.category.length > 0) {
       list = list.filter((p) => {
-        return filter.category.includes(p.category);
+        return filter.category.includes(p.mainCategory);
       });
     }
-    if (filter.color.length > 0) {
+    if (filter.subCategory.length > 0) {
       list = list.filter((p) => {
-        const check = p.colors.find((e) => filter.color.includes(e));
-        return check !== undefined;
+        return filter.subCategory.includes(p.subCategory);
       });
     }
     if (filter.size.length > 0) {
       list = list.filter((p) => {
-        const check = p.size.find((e) => filter.size.includes(e));
+        const check = p.sizes.find((e) => filter.size.includes(e));
         return check !== undefined;
       });
     }
@@ -128,9 +133,43 @@ const Catalog = () => {
   }, [updateProducts]);
 
   useEffect(() => {
+    if (categoryLabel === "No Label") {
+      setProducts(allProducts);
+      return;
+    }
+
+    let newLabel = "";
+
+    switch (categoryLabel) {
+      case "Quan":
+        newLabel = "Trousers";
+        break;
+      case "Giay":
+        newLabel = "Shoes";
+        break;
+      case "Ao":
+        newLabel = "Shirts";
+        break;
+      case "Tui":
+        newLabel = "Bags";
+        break;
+      default:
+        break;
+    }
+
+    if (newLabel) {
+      const list = allProducts.filter((p) => {
+        return p.subCategory === newLabel;
+      });
+
+      setProducts(list);
+    }
+  }, [categoryLabel, allProducts]);
+
+  useEffect(() => {
     if (categoryName) {
       const list = allProducts.filter((p) => {
-        return p.category === categoryName;
+        return p.mainCategory === categoryName;
       });
 
       setProducts(list);
@@ -150,12 +189,16 @@ const Catalog = () => {
                 type="text"
                 name="search"
                 placeholder="Search"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") searchItem();
+                }}
                 ref={inputSearchRef}
               />
               <button className="btn-search" onClick={searchItem}>
                 <i className="fas fa-search"></i>
               </button>
             </div>
+            <UploadSearch setCategoryLabel={setCategoryLabel} />
           </div>
           <div className="row">
             <div className="catalog-filter col-lg-2">
@@ -175,16 +218,16 @@ const Catalog = () => {
                 </div>
               </div>
               <div className="catalog-filter__wrapper">
-                <h3 className="catalog-filter__title">Colors</h3>
+                <h3 className="catalog-filter__title">Type</h3>
                 <div className="catalog-filter__content">
-                  {colors.map((item, index) => (
+                  {subCategories.map((item, index) => (
                     <CheckBox
                       key={index}
                       label={item.display}
                       onChange={(input) =>
-                        filterSelect("COLOR", input.checked, item)
+                        filterSelect("SUBCATEGORY", input.checked, item)
                       }
-                      checked={filter.color.includes(item.color)}
+                      checked={filter.subCategory.includes(item.subCategory)}
                     />
                   ))}
                 </div>

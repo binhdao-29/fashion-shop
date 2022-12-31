@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SuccessModal = ({ title, isAddSuccess, toggleSuccessModal }) => {
+const SuccessModal = ({ name, isAddSuccess, toggleSuccessModal }) => {
   return (
     <div className={`modal-overlay ${isAddSuccess ? "active" : ""}`}>
       <div className="success-modal">
@@ -12,7 +12,7 @@ const SuccessModal = ({ title, isAddSuccess, toggleSuccessModal }) => {
           <div className="modal-fix"></div>
         </div>
 
-        <div className="product__title">{title}</div>
+        <div className="product__title">{name}</div>
         <div className="modal__text">is added to cart !</div>
         <div className="modal__footer">
           <button
@@ -28,7 +28,7 @@ const SuccessModal = ({ title, isAddSuccess, toggleSuccessModal }) => {
 };
 
 SuccessModal.propTypes = {
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   toggleSuccessModal: PropTypes.func.isRequired,
   isAddSuccess: PropTypes.bool.isRequired,
 };

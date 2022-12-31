@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import PropTypes from "prop-types";
 import SuccessModal from "./SuccessModal";
 import { AppContext } from "../context/AppProvider";
+import { urlFor } from "../lib/client";
 
 const ProductView = ({ product, display, setDisplay }) => {
   const { cart, setCart } = useContext(AppContext);
 
-  const [imageCurrent, setImageCurrent] = useState(product.image01);
-
+  const [imageCurrent, setImageCurrent] = useState(
+    product.image && urlFor(product.image[0])
+  );
   const [color, setColor] = useState(undefined);
   const [size, setSize] = useState(undefined);
 
@@ -35,7 +37,7 @@ const ProductView = ({ product, display, setDisplay }) => {
   };
 
   useEffect(() => {
-    setImageCurrent(product.image01);
+    setImageCurrent(product.image && urlFor(product.image[0]));
 
     return () => {
       setQuantity(1);
@@ -103,7 +105,7 @@ const ProductView = ({ product, display, setDisplay }) => {
       {/* Add to cart success */}
       <SuccessModal
         isAddSuccess={isAddSuccess}
-        title={product.title}
+        name={product.name}
         toggleSuccessModal={toggleSuccessModal}
       />
 
@@ -121,27 +123,19 @@ const ProductView = ({ product, display, setDisplay }) => {
             <div className="col-md-6 col-lg-7">
               <div className="wrapper__image">
                 <ul className="image__list">
-                  <li
-                    onClick={() => setImageCurrent(product.image01)}
-                    className="image__list__item"
-                  >
-                    {product.image01 && <img src={product.image01} alt="" />}
-                    <div className="overlay"></div>
-                  </li>
-                  <li
-                    onClick={() => setImageCurrent(product.image02)}
-                    className="image__list__item"
-                  >
-                    {product.image02 && <img src={product.image02} alt="" />}
-                    <div className="overlay"></div>
-                  </li>
-                  <li
-                    onClick={() => setImageCurrent(product.image03)}
-                    className="image__list__item"
-                  >
-                    {product.image03 && <img src={product.image03} alt="" />}
-                    <div className="overlay"></div>
-                  </li>
+                  {product?.image?.map((item, index) => {
+                    const imgUrl = urlFor(item);
+                    return (
+                      <li
+                        key={index}
+                        onClick={() => setImageCurrent(imgUrl)}
+                        className="image__list__item"
+                      >
+                        <img src={imgUrl} alt="" />
+                        <div className="overlay"></div>
+                      </li>
+                    );
+                  })}
                 </ul>
                 <div className="image__current">
                   <img src={imageCurrent} alt="" />
@@ -151,14 +145,14 @@ const ProductView = ({ product, display, setDisplay }) => {
 
             <div className="col-md-6 col-lg-5">
               <div className="wrapper__info">
-                <h4 className="title">{product.title}</h4>
+                <h4 className="title">{product.name}</h4>
                 <span className="price">${product.price}</span>
-                <p className="description">{product.des}</p>
+                <p className="description">{product.description}</p>
                 <div className="product-variant">
                   <div className="product-variant__wrap">
                     <div className="variant__title">Size</div>
                     <div className="variant__content">
-                      {product.size.map((s, i) => (
+                      {product.sizes?.map((s, i) => (
                         <div
                           key={i}
                           onClick={() => setSize(s)}
@@ -172,7 +166,7 @@ const ProductView = ({ product, display, setDisplay }) => {
                   <div className="product-variant__wrap">
                     <div className="variant__title">Color</div>
                     <div className="variant__content">
-                      {product.colors.map((c, i) => (
+                      {product.colors?.map((c, i) => (
                         <div
                           key={i}
                           onClick={() => setColor(c)}

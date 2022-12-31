@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import productData from "../assets/test-data/products";
+import { client } from "../lib/client";
 
 export const AppContext = React.createContext();
 
@@ -7,12 +7,29 @@ export default function AppProvider({ children }) {
   const [categoryName, setCategoryName] = useState("");
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
-  const allProducts = productData.getAllProducts();
+  const [banners, setBaners] = useState([]);
+
+  const handleLoadData = async () => {
+    const bannerQuery = '*[_type == "banner"]';
+    const banners = await client.fetch(bannerQuery);
+    setBaners(banners);
+
+    const query = '*[_type == "product"]';
+    const products = await client.fetch(query);
+    setProducts(products);
+  };
+
+  const getPopularProducts = (count) => {
+    if (products.length > 0) {
+      const end = products.length - count;
+      const start = Math.floor(Math.random() * end);
+      return products.slice(start, start + count);
+    }
+    return [];
+  };
 
   useEffect(() => {
-    fetch("http://localhost:8080/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+    handleLoadData();
   }, []);
 
   useEffect(() => {
@@ -24,12 +41,13 @@ export default function AppProvider({ children }) {
   return (
     <AppContext.Provider
       value={{
-        products,
         categoryName,
         setCategoryName,
-        allProducts,
+        allProducts: products,
+        banners,
         cart,
         setCart,
+        getPopularProducts,
       }}
     >
       {children}

@@ -1,24 +1,24 @@
 const productSize = [
   {
     display: "S",
-    size: "s"
+    size: "S",
   },
   {
     display: "M",
-    size: "m"
+    size: "M",
   },
   {
     display: "L",
-    size: "l"
+    size: "L",
   },
   {
     display: "XL",
-    size: "xl"
+    size: "XL",
   },
   {
     display: "XXL",
-    size: "xxl"
+    size: "XXL",
   },
-]; 
+];
 
-export default productSize
+export default productSize;

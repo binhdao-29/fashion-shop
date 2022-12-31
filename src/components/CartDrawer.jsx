@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from "react";
 import { useHistory } from "react-router";
 import { AppContext } from "../context/AppProvider";
+import { urlFor } from "../lib/client";
 
 export default function CartDrawer({ isVisible, handleClickCart }) {
   const { cart, setCart } = useContext(AppContext);
@@ -60,10 +61,10 @@ export default function CartDrawer({ isVisible, handleClickCart }) {
                   onClick={() => deleteItem(item.id, item.color, item.size)}
                   className="item__image"
                 >
-                  <img src={item.image01} alt="" />
+                  <img src={urlFor(item.image[0])} alt="" />
                 </div>
                 <div className="item__info">
-                  <span className="item__title">{item.title}</span>
+                  <span className="item__title">{item.name}</span>
                   <span className="item__price">
                     {item.quantity} x ${item.price}
                   </span>
